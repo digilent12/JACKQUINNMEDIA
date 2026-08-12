@@ -61,7 +61,7 @@ button {
   justify-content: space-between;
   height: var(--header-height);
   padding: 0 clamp(1.5rem, 4vw, 3rem);
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 30%, transparent 100%);
   pointer-events: none;
 }
 
@@ -101,6 +101,9 @@ button {
   height: 100vh;
   min-height: 500px;
   overflow: hidden;
+  
+  margin: 0 auto;
+  text-align: center;
 }
 
 .hero img {
@@ -111,6 +114,8 @@ button {
 }
 
 .hero-content {
+  padding-left: 1.5rem;  /* Prevents text from touching edge of screen */
+  padding-right: 1.5rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -128,6 +133,8 @@ button {
   flex-direction: column;
 
 }
+
+
 
 
 
