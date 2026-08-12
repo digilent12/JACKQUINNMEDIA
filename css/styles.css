@@ -160,34 +160,59 @@ button {
   }
 
 
-/* Gallery */
+/* Gallery Container */
 .gallery {
-  padding: var(--gap);
+  padding: var(--gap, 1rem);
 }
 
+/* Responsive Masonry Grid */
 .gallery-grid {
-  column-count: 3;
-  column-gap: var(--gap);
+  column-count: 1;
+  column-gap: var(--gap, 1rem);
 }
 
+@media (min-width: 600px) {
+  .gallery-grid {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 900px) {
+  .gallery-grid {
+    column-count: 3;
+  }
+}
+
+/* Gallery Item Card */
 .gallery-item {
   position: relative;
+  display: inline-block; /* Prevents Chrome/Safari column breaking bugs */
+  width: 100%;
+  margin-bottom: var(--gap, 1rem);
+  background: #111;
   overflow: hidden;
   cursor: pointer;
-  background: #111;
   break-inside: avoid;
-  margin-bottom: var(--gap);
 }
 
+/* Focus indicator for keyboard users */
+.gallery-item:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Image Transitions */
 .gallery-item img {
+  
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.4s ease, opacity var(--transition);
+  transition: transform 0.4s ease, opacity var(--transition, 0.3s ease);
 }
 
-.gallery-item:hover img {
-  transform: scale(1.02);
+.gallery-item:hover img,
+.gallery-item:focus-visible img {
+  transform: scale(1.05);
   opacity: 0.85;
 }
 

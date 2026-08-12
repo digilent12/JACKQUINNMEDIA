@@ -1,4 +1,3 @@
-
 const BASE_URL = './images/';
 
 const photos = [
@@ -45,22 +44,55 @@ function buildGallery() {
   const grid = document.getElementById('gallery-grid');
   if (!grid) return;
 
+  // DocumentFragment prevents repeated DOM layout reflows
+  const fragment = document.createDocumentFragment();
+
   photos.forEach((photo, index) => {
     const item = document.createElement('div');
-    
-    // Add 'tall' class if photo.tall is true, otherwise keep it regular
-    item.className = `gallery-item ${photo.tall ? 'tall' : ''}`;
+    item.className = `gallery-item ${photo.tall ? 'tall' : ''}`.trim();
     item.dataset.index = index;
+
+    // Accessibility attributes
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('role', 'button');
+    item.setAttribute('aria-label', `View concert photo ${index + 1}`);
 
     const img = document.createElement('img');
     img.src = photoUrl(photo.file);
     img.alt = `Concert photography ${index + 1} by JackQuinnMedia`;
     img.loading = 'lazy';
+    img.decoding = 'async';
 
     item.appendChild(img);
-    grid.appendChild(item);
+    fragment.appendChild(item);
+  });
+
+  // Single DOM insertion
+  grid.appendChild(fragment);
+
+  // Event Delegation for image clicks / lightbox triggers
+  grid.addEventListener('click', handleGalleryInteraction);
+  grid.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleGalleryInteraction(e);
+    }
   });
 }
+
+function handleGalleryInteraction(e) {
+  const item = e.target.closest('.gallery-item');
+  if (!item) return;
+
+  const photoIndex = parseInt(item.dataset.index, 10);
+  const selectedPhoto = photos[photoIndex];
+  
+  // Custom click action (e.g. open in modal / lightbox)
+  console.log('Selected photo index:', photoIndex, selectedPhoto);
+}
+
+// Initialize gallery on DOM ready
+document.addEventListener('DOMContentLoaded', buildGallery);
 
 function buildCarousel() {
   const track = document.getElementById('instagram-track');
