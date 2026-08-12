@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/:path*",
-      "destination": "https://galleries.yourdomain.com/:path*",
+      "destination": "https://galleries.jackquinnmedia.com/:path*",
       "permanent": true
     }
   ]
