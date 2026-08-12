@@ -186,6 +186,9 @@ function initContactForm() {
   const status = document.getElementById('form-status');
   if (!form) return;
 
+  // Initialize EmailJS with your Public Key
+  emailjs.init("hLSnXOATDYvTOxlDS");
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -200,13 +203,23 @@ function initContactForm() {
       return;
     }
 
-    const subject = encodeURIComponent(`Inquiry from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-    window.location.href = `mailto:jackquinnmedia@gmail.com?subject=${subject}&body=${body}`;
-
-    status.textContent = 'Opening your email client…';
-    status.className = 'form-status success';
+    // Show sending state
+    status.textContent = 'Sending message...';
+    status.className = 'form-status sending';
     status.hidden = false;
+
+    // Send email via EmailJS
+    emailjs.sendForm('service_ljz2k14', 'template_wn2322l', form)
+      .then(() => {
+        status.textContent = 'Message sent successfully!';
+        status.className = 'form-status success';
+        form.reset(); // Clear the form fields
+      })
+      .catch((error) => {
+        console.error('EmailJS Error:', error);
+        status.textContent = 'Failed to send message. Please try again.';
+        status.className = 'form-status error';
+      });
   });
 }
 
