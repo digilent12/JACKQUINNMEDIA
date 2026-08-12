@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/:slug([^./]+)",
-      "destination": "https://galleries.yourdomain.com/:slug",
+      "destination": "https://galleries.jackquinnmedia.com/:slug",
       "permanent": true
     }
   ]
