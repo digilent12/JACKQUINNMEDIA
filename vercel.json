@@ -1,7 +1,7 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
+     "source": "/:path((?!$|contact|about|work).*)",
       "destination": "https://galleries.jackquinnmedia.com/:path*",
       "permanent": true
     }
