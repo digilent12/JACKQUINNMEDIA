@@ -114,6 +114,7 @@ button {
 }
 
 .hero-content {
+  font-family: var(--font-mono);
   padding-left: 1.5rem;  /* Prevents text from touching edge of screen */
   padding-right: 1.5rem;
   position: absolute;
